@@ -1,0 +1,1475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JKPSC VAS — MCQ Practice</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f4f1ec;--card:#fff;--ink:#1c1c1c;--ink2:#5c5c5c;--ink3:#9c9c9c;
+  --accent:#1b3d6e;--accent-light:#e8eef7;
+  --gold:#b8832a;--gold-light:#fdf3e3;
+  --green:#256b45;--green-light:#e8f5ee;
+  --red:#a63030;--red-light:#fdf0f0;
+  --yellow:#c07c10;--yellow-light:#fef8ec;
+  --border:#e0dbd2;--radius:16px;
+  --shadow:0 2px 16px rgba(0,0,0,.06);
+  --shadow-md:0 4px 28px rgba(0,0,0,.10);
+  --shadow-lg:0 8px 48px rgba(0,0,0,.14);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;}
+.screen{padding-bottom:120px;}
+
+/* ══ HEADER ══ */
+.hdr{background:var(--accent);color:#fff;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(27,61,110,.35);}
+.hdr-left{display:flex;align-items:center;gap:12px;}
+.am-logo{display:flex;flex-direction:column;align-items:center;justify-content:center;width:38px;height:38px;background:linear-gradient(135deg,var(--gold),#d4a050);border-radius:9px;flex-shrink:0;}
+.am-text{font-family:'Lora',serif;font-size:.85rem;font-weight:700;color:#fff;letter-spacing:.04em;}
+.am-369{font-size:.5rem;font-weight:600;color:rgba(255,255,255,.8);letter-spacing:.1em;}
+.hdr-title{font-family:'Lora',serif;font-size:.95rem;line-height:1.2;}
+.hdr-sub{font-size:.6rem;opacity:.6;margin-top:1px;font-weight:300;}
+.hdr-right{display:flex;align-items:center;gap:10px;}
+.hdr-pill{background:var(--gold);font-size:.6rem;font-weight:600;letter-spacing:.07em;text-transform:uppercase;padding:4px 10px;border-radius:20px;white-space:nowrap;}
+.hamburger{background:none;border:none;cursor:pointer;padding:6px;display:flex;flex-direction:column;gap:5px;}
+.hamburger span{display:block;width:22px;height:2px;background:#fff;border-radius:2px;}
+
+/* ══ DRAWER ══ */
+.drawer-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:200;display:none;}
+.drawer-overlay.open{display:block;}
+.drawer{position:fixed;top:0;right:-310px;width:290px;height:100%;background:var(--card);z-index:201;box-shadow:var(--shadow-lg);transition:right .28s ease;display:flex;flex-direction:column;}
+.drawer.open{right:0;}
+.drawer-hdr{background:linear-gradient(135deg,#071020,#112044);padding:24px 18px 18px;color:#fff;position:relative;flex-shrink:0;}
+.drawer-logo-row{display:flex;align-items:center;gap:10px;margin-bottom:3px;}
+.drawer-am{display:flex;flex-direction:column;align-items:center;justify-content:center;width:32px;height:32px;background:linear-gradient(135deg,var(--gold),#c97d20);border-radius:7px;}
+.drawer-am span:first-child{font-family:'Lora',serif;font-size:.75rem;font-weight:700;color:#fff;}
+.drawer-am span:last-child{font-size:.42rem;color:rgba(255,255,255,.75);letter-spacing:.08em;}
+.drawer-title{font-family:'Lora',serif;font-size:1rem;color:#fff;}
+.drawer-sub{font-size:.65rem;opacity:.45;margin-top:1px;}
+.drawer-close{position:absolute;top:14px;right:12px;background:rgba(255,255,255,.1);border:none;color:#fff;font-size:.9rem;cursor:pointer;padding:5px 10px;border-radius:8px;}
+.drawer-body{flex:1;overflow-y:auto;padding-bottom:20px;}
+.drawer-sec{padding:16px 14px 4px;}
+.drawer-sec-lbl{font-size:.6rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink3);padding:0 4px;margin-bottom:8px;}
+.dnav{display:flex;align-items:center;gap:10px;width:100%;padding:12px 14px;background:none;border:none;border-radius:11px;font-family:'DM Sans',sans-serif;font-size:.88rem;font-weight:500;color:var(--ink);cursor:pointer;text-align:left;transition:background .12s;margin-bottom:2px;}
+.dnav:hover{background:var(--bg);}
+.dnav.on{background:var(--accent-light);color:var(--accent);font-weight:600;}
+.dnav-icon{font-size:1.1rem;width:24px;text-align:center;}
+.ddiv{height:1px;background:var(--border);margin:10px 14px;}
+
+/* ── Drawer Mock Noticeboard ── */
+.d-mock{margin:0 14px 14px;border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,.06);}
+.d-mock-top{background:linear-gradient(135deg,#071020,#0d1e3a);padding:14px 14px 10px;}
+.d-mock-badge{display:inline-flex;align-items:center;gap:5px;font-size:.58rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 9px;border-radius:20px;margin-bottom:8px;}
+.d-mock-badge.waiting{background:rgba(184,131,42,.18);border:1px solid rgba(184,131,42,.35);color:#e8b86a;}
+.d-mock-badge.live{background:rgba(40,200,70,.18);border:1px solid rgba(40,200,70,.35);color:#40d060;animation:glowbadge 1.2s ease-in-out infinite alternate;}
+@keyframes glowbadge{from{box-shadow:0 0 0 rgba(40,200,70,.3);}to{box-shadow:0 0 10px rgba(40,200,70,.5);}}
+.d-mock-dot{width:5px;height:5px;border-radius:50%;background:currentColor;animation:pulseD .9s infinite;}
+@keyframes pulseD{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.35;transform:scale(1.5);}}
+.d-mock-title{font-family:'Lora',serif;font-size:.95rem;color:#fff;margin-bottom:2px;}
+.d-mock-title span{color:#e8b86a;}
+.d-mock-cd{font-family:'Lora',serif;font-size:1.5rem;color:#fff;margin-bottom:10px;letter-spacing:.02em;}
+.d-mock-cd.live-cd{color:#40d060;}
+.d-mock-sessions{background:rgba(0,0,0,.2);padding:8px 14px;}
+.d-sess-row{display:flex;align-items:center;gap:8px;padding:5px 0;font-size:.74rem;color:rgba(255,255,255,.38);border-bottom:1px solid rgba(255,255,255,.04);}
+.d-sess-row:last-child{border-bottom:none;}
+.d-sess-row.next{color:#e8b86a;}
+.d-sess-row.active-sess{color:#40d060;}
+.d-sess-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.15);flex-shrink:0;}
+.d-sess-row.next .d-sess-dot{background:#e8b86a;}
+.d-sess-row.active-sess .d-sess-dot{background:#40d060;animation:pulseD .8s infinite;}
+.d-sess-time{font-weight:700;min-width:42px;}
+.d-sess-lbl{flex:1;}
+.d-sess-tag{font-size:.56rem;font-weight:700;padding:2px 7px;border-radius:10px;text-transform:uppercase;letter-spacing:.07em;}
+.d-sess-tag.next-tag{background:rgba(184,131,42,.25);color:#e8b86a;}
+.d-sess-tag.live-tag{background:rgba(40,200,70,.25);color:#40d060;}
+.d-mock-btn{display:block;width:calc(100% - 28px);margin:10px 14px 14px;padding:10px;background:linear-gradient(135deg,var(--gold),#c97d20);color:#fff;font-family:'DM Sans',sans-serif;font-size:.8rem;font-weight:700;border:none;border-radius:9px;cursor:pointer;text-align:center;letter-spacing:.04em;}
+.d-mock-btn:disabled{opacity:.35;cursor:not-allowed;background:#666;}
+
+/* ══ SCREENS ══ */
+.screen{display:none;}
+.screen.active{display:block;animation:fadeUp .3s ease;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+
+/* ══ SETUP ══ */
+.setup-wrap{max-width:600px;margin:0 auto;padding:0 0 180px;}
+.hero{background:linear-gradient(160deg,#1b3d6e 0%,#0f2444 60%,#1a3660 100%);padding:28px 18px 32px;text-align:center;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;top:-60px;right:-60px;width:200px;height:200px;border-radius:50%;background:rgba(184,131,42,.07);}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(184,131,42,.18);border:1px solid rgba(184,131,42,.32);color:#e8b86a;font-size:.65rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:4px 12px;border-radius:20px;margin-bottom:14px;}
+.hero-title{font-family:'Lora',serif;font-size:1.6rem;color:#fff;line-height:1.25;margin-bottom:9px;position:relative;z-index:1;}
+.hero-title span{color:#e8b86a;}
+.hero-desc{font-size:.83rem;color:rgba(255,255,255,.5);line-height:1.65;max-width:400px;margin:0 auto 22px;font-weight:300;position:relative;z-index:1;}
+.feat-slider-wrap{position:relative;z-index:1;margin-top:4px;overflow:hidden;border-radius:14px;border:1px solid rgba(255,255,255,.1);}
+.feat-slider{display:flex;width:100%;transition:transform .45s ease;}
+.feat-slide{min-width:100%;width:100%;padding:20px 18px 18px;background:rgba(255,255,255,.07);text-align:center;flex-shrink:0;box-sizing:border-box;}
+.feat-slide-icon{font-size:2rem;display:block;margin-bottom:10px;line-height:1;}
+.feat-slide-title{font-size:.95rem;font-weight:700;color:#fff;margin-bottom:7px;font-family:'Lora',serif;}
+.feat-slide-desc{font-size:.74rem;color:rgba(255,255,255,.55);line-height:1.6;max-width:320px;margin:0 auto;}
+.feat-dots{display:flex;justify-content:center;gap:6px;margin-top:11px;}
+.fdot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.2);cursor:pointer;transition:all .3s;}
+.fdot.on{background:var(--gold);width:20px;border-radius:3px;}
+
+.hero-stats{display:flex;justify-content:center;gap:0;margin-top:16px;background:rgba(0,0,0,.18);border-radius:12px;overflow:hidden;position:relative;z-index:1;}
+.hstat{flex:1;padding:10px 2px;text-align:center;border-right:1px solid rgba(255,255,255,.07);}
+.hstat:last-child{border-right:none;}
+.hstat-val{display:block;font-family:'Lora',serif;font-size:.95rem;color:#e8b86a;line-height:1.1;}
+.hstat-lbl{display:block;font-size:.46rem;color:rgba(255,255,255,.38);text-transform:uppercase;letter-spacing:.03em;margin-top:3px;line-height:1.3;word-break:break-word;padding:0 2px;}
+.setup-card{background:var(--card);border-radius:16px;padding:22px 16px 26px;box-shadow:var(--shadow-md);border:1px solid var(--border);margin:16px 14px 0;position:relative;z-index:2;}
+.setup-h{font-family:'Lora',serif;font-size:1.05rem;color:var(--accent);margin-bottom:16px;}
+.form-lbl{display:block;font-size:.67rem;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--ink2);margin-bottom:6px;}
+.form-grp{margin-bottom:18px;}
+select{width:100%;padding:12px 36px 12px 13px;border:1.5px solid var(--border);border-radius:10px;font-family:'DM Sans',sans-serif;font-size:.9rem;color:var(--ink);background:var(--bg) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='7'%3E%3Cpath d='M1 1l4.5 4.5L10 1' stroke='%235c5c5c' stroke-width='1.6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat right 12px center;appearance:none;cursor:pointer;transition:border-color .18s;}
+select:focus{outline:none;border-color:var(--accent);}
+.chip-area{min-height:46px;padding:8px 10px;border:1.5px solid var(--border);border-radius:10px;background:var(--bg);display:flex;flex-wrap:wrap;gap:6px;align-items:flex-start;}
+.chip-hint{color:var(--ink3);font-size:.8rem;padding:3px 2px;}
+.chip{display:inline-flex;align-items:center;padding:5px 12px;border-radius:20px;font-size:.74rem;font-weight:500;cursor:pointer;user-select:none;transition:all .14s;border:1.5px solid transparent;}
+.chip.on{background:var(--accent);color:#fff;border-color:var(--accent);}
+.chip.off{background:#fff;color:var(--ink2);border-color:var(--border);}
+.chip.all-on{background:var(--gold);border-color:var(--gold);color:#fff;}
+.chip.all-off{background:#fff;border-color:var(--gold);color:var(--gold);}
+.meta-row{display:flex;gap:8px;margin-bottom:20px;}
+.meta-pill{flex:1;background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:10px 6px;text-align:center;}
+.meta-val{font-family:'Lora',serif;font-size:1.3rem;color:var(--accent);}
+.meta-lbl{font-size:.62rem;color:var(--ink3);text-transform:uppercase;letter-spacing:.05em;margin-top:2px;}
+.btn-main{width:100%;padding:14px;background:var(--accent);color:#fff;font-family:'DM Sans',sans-serif;font-size:.93rem;font-weight:600;border:none;border-radius:11px;cursor:pointer;transition:background .18s;}
+.btn-main:hover:not(:disabled){background:#142f56;}
+.btn-main:disabled{opacity:.4;cursor:not-allowed;}
+.err-box{background:var(--red-light);border:1px solid #f0c0c0;color:var(--red);padding:9px 12px;border-radius:8px;font-size:.8rem;margin-bottom:14px;display:none;}
+/* ══ PREMIUM LOADING ══ */
+.spin-wrap{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 20px;gap:16px;color:var(--ink2);}
+.spinner{display:none;}
+/* DNA / triple-ring loader */
+.am-loader{position:relative;width:52px;height:52px;}
+.am-loader span{position:absolute;inset:0;border-radius:50%;border:3px solid transparent;animation:amSpin 1.4s cubic-bezier(.65,.05,.35,.95) infinite;}
+.am-loader span:nth-child(1){border-top-color:#e8b86a;animation-duration:1.4s;}
+.am-loader span:nth-child(2){border-right-color:rgba(184,131,42,.5);animation-duration:1.1s;animation-direction:reverse;inset:7px;}
+.am-loader span:nth-child(3){border-bottom-color:rgba(184,131,42,.25);animation-duration:.8s;inset:14px;}
+@keyframes amSpin{to{transform:rotate(360deg);}}
+/* pulsing dots row */
+.am-dots{display:flex;gap:6px;align-items:center;}
+.am-dot{width:7px;height:7px;border-radius:50%;background:var(--accent);opacity:.2;animation:amDot 1.2s ease-in-out infinite;}
+.am-dot:nth-child(1){animation-delay:0s;}
+.am-dot:nth-child(2){animation-delay:.18s;}
+.am-dot:nth-child(3){animation-delay:.36s;}
+.am-dot:nth-child(4){animation-delay:.54s;}
+@keyframes amDot{0%,100%{opacity:.15;transform:scale(.85);}50%{opacity:1;transform:scale(1.1);}}
+/* skeleton shimmer for lb rows */
+.lb-skel{height:58px;border-radius:12px;background:linear-gradient(90deg,var(--card) 25%,rgba(255,255,255,.04) 50%,var(--card) 75%);background-size:200% 100%;animation:skelShim 1.4s ease-in-out infinite;margin-bottom:10px;}
+@keyframes skelShim{0%{background-position:200% 0;}100%{background-position:-200% 0;}}
+.spin-txt{font-size:.78rem;font-weight:400;color:var(--ink3);letter-spacing:.03em;}
+
+/* ══ FIXED BOTTOM MOCK BOARD ══ */
+#mock-strip{position:fixed;bottom:0;left:0;right:0;z-index:90;display:block;}
+
+/* -- WAITING: notice board style -- */
+.mstrip-wait{
+  background:linear-gradient(90deg,#050d1a 0%,#0a1830 50%,#050d1a 100%);
+  border-top:2px solid rgba(184,131,42,.5);
+  overflow:hidden;
+}
+/* Row 1 — "Next Mock Test at X" */
+.mstrip-row1{
+  display:flex;align-items:center;gap:6px;
+  padding:6px 10px 5px;border-bottom:1px solid rgba(255,255,255,.05);
+  overflow:hidden;
+}
+.mstrip-fire{font-size:.9rem;flex-shrink:0;}
+.mstrip-next-txt{color:rgba(255,255,255,.75);font-size:.7rem;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.mstrip-next-txt b{color:#e8b86a;}
+.mstrip-pills-row{display:flex;gap:4px;flex-shrink:0;}
+.mstrip-spill{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.45);font-size:.55rem;padding:2px 5px;border-radius:10px;white-space:nowrap;}
+/* Row 2 — countdown + join */
+.mstrip-row2{
+  display:flex;align-items:center;gap:0;
+}
+.mstrip-tag2{
+  background:linear-gradient(135deg,#8a5c10,var(--gold));
+  color:#fff;font-size:.58rem;font-weight:800;
+  letter-spacing:.08em;text-transform:uppercase;
+  padding:8px 8px;white-space:nowrap;flex-shrink:0;
+  display:flex;align-items:center;gap:4px;
+}
+.mstrip-tag-dot{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.7);animation:pulseD 1.2s infinite;flex-shrink:0;}
+.mstrip-big-cd{
+  font-family:'Lora',serif;font-size:1rem;color:#e8b86a;
+  padding:8px 10px;letter-spacing:.03em;flex-shrink:0;
+  border-right:1px solid rgba(255,255,255,.07);
+}
+.mstrip-desc2{flex:1;color:rgba(255,255,255,.3);font-size:.58rem;padding:0 8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;}
+.mstrip-join{
+  background:linear-gradient(135deg,var(--gold),#c97d20);
+  color:#fff;font-family:'DM Sans',sans-serif;font-size:.7rem;font-weight:700;
+  border:none;padding:10px 14px;cursor:pointer;
+  letter-spacing:.04em;flex-shrink:0;
+  border-left:1px solid rgba(255,255,255,.1);
+}
+.mstrip-practice-row{border-top:1px solid rgba(184,131,42,.25);padding:0;}
+.mstrip-practice-label{display:none;}
+.mstrip-practice-btn{
+  position:relative;overflow:hidden;
+  width:100%;display:flex;align-items:center;justify-content:center;gap:10px;
+  background:linear-gradient(135deg,#0c1e3a 0%,#162f55 50%,#0c1e3a 100%);
+  color:#e8b86a;
+  font-family:'DM Sans',sans-serif;font-size:.85rem;font-weight:700;
+  border:none;padding:13px 20px;cursor:pointer;letter-spacing:.06em;
+  border-bottom:2px solid rgba(184,131,42,.3);
+}
+.mstrip-practice-btn::before{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(105deg,transparent 25%,rgba(255,215,100,.18) 50%,transparent 75%);
+  background-size:200% 100%;
+  animation:tapShim 1.8s ease-in-out infinite;
+}
+@keyframes tapShim{0%{background-position:200% 0;}100%{background-position:-200% 0;}}
+.mstrip-practice-btn:active{opacity:.75;}
+/* keep old scroll classes for safety */
+.mstrip-scroll{flex:1;overflow:hidden;position:relative;}
+.mstrip-scroll-inner{display:flex;align-items:center;gap:0;white-space:nowrap;animation:scrollTicker 24s linear infinite;padding:9px 0;}
+@keyframes scrollTicker{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+.mstrip-item{display:inline-flex;align-items:center;gap:6px;color:rgba(255,255,255,.7);font-size:.7rem;padding:0 18px;}
+.mstrip-item .t{color:#e8b86a;font-weight:700;}
+.mstrip-sep{color:rgba(255,255,255,.12);font-size:.8rem;}
+
+/* -- ACTIVE: glowing green live bar -- */
+.mstrip-live{
+  background:linear-gradient(90deg,#041208 0%,#082216 50%,#041208 100%);
+  border-top:2px solid rgba(40,200,70,.45);
+  display:flex;flex-direction:column;gap:0;
+  padding:0;
+  animation:liveGlow 2s ease-in-out infinite alternate;
+}
+.mstrip-live-row1{display:flex;align-items:center;gap:8px;padding:8px 12px 5px;}
+.mstrip-live-row2{display:flex;align-items:center;gap:0;border-top:1px solid rgba(255,255,255,.05);}
+@keyframes liveGlow{from{border-top-color:rgba(40,200,70,.35);}to{border-top-color:rgba(40,200,70,.75);}}
+.mstrip-live-badge{
+  display:flex;align-items:center;gap:5px;
+  background:rgba(40,200,70,.15);border:1px solid rgba(40,200,70,.35);
+  color:#40d060;font-size:.58rem;font-weight:800;
+  letter-spacing:.1em;text-transform:uppercase;
+  padding:4px 9px;border-radius:8px;flex-shrink:0;
+}
+.mstrip-live-dot{width:6px;height:6px;border-radius:50%;background:#40d060;animation:pulseD .75s infinite;}
+.mstrip-live-info{flex:1;}
+.mstrip-live-title{font-size:.78rem;font-weight:700;color:#fff;}
+.mstrip-live-sub{font-size:.62rem;color:rgba(255,255,255,.38);margin-top:1px;}
+.mstrip-ticker-wrap{overflow:hidden;width:100%;margin-top:2px;}
+.mstrip-ticker{display:inline-block;white-space:nowrap;font-size:.58rem;color:rgba(255,255,255,.4);animation:tickerScroll 22s linear infinite;letter-spacing:.02em;}
+@keyframes tickerScroll{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+.mstrip-live-timer{text-align:center;flex-shrink:0;}
+.mstrip-live-num{font-family:'Lora',serif;font-size:1.2rem;color:#40d060;line-height:1;}
+.mstrip-live-lbl{font-size:.48rem;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.06em;}
+.mstrip-live-btn{
+  background:linear-gradient(135deg,#28a045,#1d7a34);
+  color:#fff;font-family:'DM Sans',sans-serif;
+  font-size:.74rem;font-weight:700;
+  border:none;padding:12px 18px;border-radius:0;
+  cursor:pointer;letter-spacing:.04em;flex-shrink:0;
+  box-shadow:none;
+  animation:btnGlow 1.5s ease-in-out infinite alternate;
+}
+@keyframes btnGlow{from{box-shadow:0 2px 8px rgba(40,160,69,.3);}to{box-shadow:0 2px 18px rgba(40,160,69,.7);}}
+
+/* ══ LATE MODAL ══ */
+.modal-ov{position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:400;display:none;align-items:flex-end;justify-content:center;}
+.modal-ov.open{display:flex;animation:fadeIn .2s ease;}
+@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+.late-sheet{background:#080f1a;border-radius:22px 22px 0 0;width:100%;max-width:500px;border-top:3px solid rgba(40,200,70,.4);overflow:hidden;}
+.late-head{background:linear-gradient(135deg,#0a1c0e,#10301a);padding:20px 20px 16px;display:flex;align-items:flex-start;gap:13px;}
+.late-alarm{font-size:2rem;flex-shrink:0;animation:wobble .5s ease infinite alternate;}
+@keyframes wobble{from{transform:rotate(-10deg);}to{transform:rotate(10deg);}}
+.late-warn{font-size:.65rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#ffaa50;margin-bottom:3px;}
+.late-htitle{font-family:'Lora',serif;font-size:1.1rem;color:#fff;}
+.late-body{padding:16px 20px 32px;}
+.late-rem-box{background:rgba(40,200,70,.08);border:1px solid rgba(40,200,70,.2);border-radius:12px;padding:14px 16px;margin-bottom:14px;display:flex;align-items:center;gap:12px;}
+.late-rem-num{font-family:'Lora',serif;font-size:1.9rem;color:#40d060;line-height:1;flex-shrink:0;}
+.late-rem-info{}
+.late-rem-lbl{font-size:.65rem;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.06em;}
+.late-rem-sub{font-size:.78rem;color:rgba(255,255,255,.65);margin-top:2px;}
+.late-text{font-size:.84rem;color:rgba(255,255,255,.6);line-height:1.65;margin-bottom:18px;}
+.late-text strong{color:#ffaa50;}
+.btn-join-late{width:100%;padding:14px;background:linear-gradient(135deg,#28a045,#1d7a34);color:#fff;font-family:'DM Sans',sans-serif;font-size:.92rem;font-weight:700;border:none;border-radius:12px;cursor:pointer;margin-bottom:9px;letter-spacing:.03em;}
+.btn-skip-late{width:100%;padding:11px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.4);font-family:'DM Sans',sans-serif;font-size:.82rem;border-radius:12px;cursor:pointer;}
+
+/* ══ NAME MODAL ══ */
+.name-ov{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:350;display:none;align-items:flex-end;justify-content:center;}
+.name-ov.open{display:flex;animation:fadeIn .2s ease;}
+.name-sheet{background:var(--card);border-radius:24px 24px 0 0;padding:28px 22px 44px;width:100%;max-width:500px;}
+.name-icon{text-align:center;font-size:2.4rem;margin-bottom:10px;}
+.name-title{font-family:'Lora',serif;font-size:1.2rem;color:var(--accent);text-align:center;margin-bottom:5px;}
+.name-sub{font-size:.82rem;color:var(--ink2);text-align:center;margin-bottom:22px;line-height:1.5;}
+.name-input{width:100%;padding:14px 16px;border:2px solid var(--border);border-radius:12px;font-family:'DM Sans',sans-serif;font-size:1rem;color:var(--ink);background:var(--bg);outline:none;transition:border-color .18s;margin-bottom:8px;}
+.name-input:focus{border-color:var(--accent);}
+.name-hint{font-size:.72rem;color:var(--ink3);margin-bottom:18px;text-align:center;}
+.btn-name{width:100%;padding:14px;background:linear-gradient(135deg,var(--gold),#c97d20);color:#fff;font-family:'DM Sans',sans-serif;font-size:.95rem;font-weight:700;border:none;border-radius:12px;cursor:pointer;letter-spacing:.03em;}
+
+/* ══ QUIZ ══ */
+#screen-quiz{padding-bottom:120px;}
+.quiz-wrap{max-width:680px;margin:0 auto;padding:0 14px 120px;}
+.timer-bar{background:var(--card);border-radius:0 0 12px 12px;padding:11px 16px;margin-bottom:10px;display:flex;align-items:center;gap:12px;box-shadow:var(--shadow);border:1px solid var(--border);border-top:none;position:sticky;top:62px;z-index:30;}
+.timer-num{font-family:'Lora',serif;font-size:1.5rem;color:var(--accent);min-width:60px;transition:color .4s;}
+.timer-num.urgent{color:var(--red);}
+.prog-track{flex:1;height:5px;background:var(--border);border-radius:3px;overflow:hidden;}
+.prog-fill{height:100%;background:var(--accent);border-radius:3px;transition:width 1s linear,background .5s;}
+.prog-fill.urgent{background:var(--red);}
+.q-ctr{font-size:.78rem;color:var(--ink2);white-space:nowrap;font-weight:600;}
+.mock-tag{background:linear-gradient(135deg,var(--gold),#c97d20);color:#fff;font-size:.6rem;font-weight:700;padding:3px 9px;border-radius:20px;letter-spacing:.07em;text-transform:uppercase;}
+.nav-dots{display:flex;flex-wrap:wrap;gap:5px;padding:10px 12px;background:var(--card);border-radius:12px;box-shadow:var(--shadow);border:1px solid var(--border);margin-bottom:10px;}
+.dot{width:30px;height:30px;border-radius:8px;background:var(--border);display:flex;align-items:center;justify-content:center;font-size:.68rem;font-weight:700;color:var(--ink3);cursor:pointer;transition:all .14s;}
+.dot.ans{background:var(--accent);color:#fff;}
+.dot.skip{background:var(--yellow-light);color:var(--yellow);border:1.5px solid #e8c070;}
+.dot.cur{outline:2.5px solid var(--accent);outline-offset:2px;}
+.q-card{background:var(--card);border-radius:14px;padding:22px 16px;box-shadow:var(--shadow);border:1px solid var(--border);margin-bottom:10px;}
+.q-text{font-size:1rem;line-height:1.7;color:var(--ink);}
+.opts{display:grid;grid-template-columns:1fr;gap:8px;margin-top:18px;}
+.opt{display:flex;align-items:center;gap:11px;padding:13px 14px;border:1.5px solid var(--border);border-radius:11px;background:#fff;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:.88rem;line-height:1.45;color:var(--ink);text-align:left;transition:border-color .13s,background .13s;width:100%;}
+.opt:hover:not(:disabled){border-color:var(--accent);background:var(--accent-light);}
+.opt.sel{border-color:var(--accent);background:var(--accent-light);}
+.opt-lbl{min-width:28px;height:28px;border-radius:50%;border:1.5px solid var(--border);background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:700;flex-shrink:0;transition:all .13s;}
+.opt.sel .opt-lbl{background:var(--accent);color:#fff;border-color:var(--accent);}
+.q-actions{position:fixed;bottom:0;left:0;right:0;display:flex;gap:9px;padding:12px 14px 24px;background:rgba(244,241,236,.96);backdrop-filter:blur(8px);border-top:1px solid var(--border);z-index:40;}
+.btn-skip{padding:13px 18px;background:transparent;color:var(--ink2);font-family:'DM Sans',sans-serif;font-size:.86rem;font-weight:500;border:1.5px solid var(--border);border-radius:11px;cursor:pointer;white-space:nowrap;}
+.btn-nxt{flex:1;padding:13px;background:var(--accent);color:#fff;font-family:'DM Sans',sans-serif;font-size:.9rem;font-weight:600;border:none;border-radius:11px;cursor:pointer;}
+.btn-sub{flex:1;padding:10px;background:linear-gradient(135deg,var(--gold),#c97d20);color:#fff;font-family:'DM Sans',sans-serif;font-size:.78rem;font-weight:700;border:none;border-radius:10px;cursor:pointer;display:flex;align-items:center;justify-content:center;white-space:nowrap;}
+
+/* ══ RESULT ══ */
+.result-wrap{max-width:760px;margin:0 auto;padding:16px 12px 120px;}
+.score-banner{background:linear-gradient(135deg,var(--accent),#254e8a);color:#fff;border-radius:var(--radius);padding:16px 14px 14px;margin-bottom:12px;box-shadow:var(--shadow-lg);position:relative;overflow:hidden;}
+.score-banner::before{content:'';position:absolute;top:-40px;right:-40px;width:150px;height:150px;border-radius:50%;background:rgba(255,255,255,.04);}
+.score-top{display:flex;align-items:center;gap:14px;margin-bottom:12px;}
+.score-pct{font-family:'Lora',serif;font-size:2.2rem;line-height:1;flex-shrink:0;}
+.score-frac{font-size:.92rem;opacity:.8;}
+.score-grade{font-size:.72rem;opacity:.55;margin-top:3px;font-weight:300;}
+.score-pills{display:flex;gap:10px;flex-wrap:wrap;}
+.sp{background:rgba(255,255,255,.14);border-radius:8px;padding:6px 8px;min-width:0;flex:1;text-align:center;}
+.sp-val{font-family:'Lora',serif;font-size:.92rem;display:block;}
+.sp-lbl{font-size:.52rem;opacity:.65;text-transform:uppercase;letter-spacing:.04em;}
+.res-tabs{display:flex;gap:8px;margin-bottom:18px;}
+.res-tab{flex:1;padding:12px 10px;background:var(--card);border:2px solid var(--border);border-radius:11px;font-family:'DM Sans',sans-serif;font-size:.82rem;font-weight:600;color:var(--ink2);cursor:pointer;text-align:center;transition:all .17s;}
+.res-tab.on{background:var(--accent);border-color:var(--accent);color:#fff;}
+.tab-icon{font-size:1.1rem;display:block;margin-bottom:3px;}
+.tab-panel{display:none;}
+.tab-panel.on{display:block;animation:fadeUp .25s ease;}
+.rev-item{background:var(--card);border-radius:14px;border:1px solid var(--border);border-left:4px solid var(--border);padding:18px 16px;margin-bottom:10px;box-shadow:var(--shadow);}
+.rev-item.c-cor{border-left-color:var(--green);}
+.rev-item.c-wrng{border-left-color:var(--red);}
+.rev-item.c-skip{border-left-color:var(--yellow);}
+.rev-top{display:flex;align-items:flex-start;gap:9px;margin-bottom:11px;}
+.rev-badge{flex-shrink:0;font-size:.62rem;font-weight:700;padding:3px 8px;border-radius:5px;text-transform:uppercase;letter-spacing:.06em;margin-top:2px;}
+.b-cor{background:var(--green-light);color:var(--green);}
+.b-wrng{background:var(--red-light);color:var(--red);}
+.b-skip{background:var(--yellow-light);color:var(--yellow);}
+.rev-q{font-size:.9rem;line-height:1.6;}
+.rev-ans-row{display:flex;flex-wrap:wrap;gap:7px;}
+.ans-tag{padding:4px 11px;border-radius:7px;font-size:.78rem;font-weight:500;}
+.at-yours{background:var(--red-light);color:var(--red);}
+.at-yours-cor{background:var(--green-light);color:var(--green);}
+.at-correct{background:var(--green-light);color:var(--green);}
+.at-skip{background:var(--yellow-light);color:var(--yellow);}
+.reason-box{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:10px 12px;font-size:.8rem;color:var(--ink2);line-height:1.6;margin-top:9px;}
+.reason-lbl{font-size:.64rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--accent);display:block;margin-bottom:3px;}
+.report-section{margin-bottom:14px;}
+.report-h{font-family:'Lora',serif;font-size:.9rem;color:var(--accent);margin-bottom:8px;}
+.overall-card{background:var(--card);border-radius:12px;padding:14px;box-shadow:var(--shadow);border:1px solid var(--border);margin-bottom:10px;display:flex;align-items:center;gap:14px;}
+.donut-wrap{position:relative;width:72px;height:72px;flex-shrink:0;}
+.donut-wrap svg{transform:rotate(-90deg);}
+.donut-bg{fill:none;stroke:var(--border);stroke-width:10;}
+.donut-val{fill:none;stroke-width:10;stroke-linecap:round;transition:stroke-dasharray 1s ease;}
+.donut-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;}
+.donut-pct{font-family:'Lora',serif;font-size:1rem;color:var(--accent);line-height:1;}
+.donut-lbl{font-size:.5rem;color:var(--ink3);text-transform:uppercase;letter-spacing:.04em;}
+.overall-stats{flex:1;}
+.stat-row{display:flex;justify-content:space-between;align-items:center;padding:4px 0;border-bottom:1px solid var(--border);font-size:.78rem;}
+.stat-row:last-child{border-bottom:none;}
+.stat-lbl{color:var(--ink2);}
+.stat-val{font-weight:600;}
+.stat-val.green{color:var(--green);}
+.stat-val.red{color:var(--red);}
+.stat-val.yellow{color:var(--yellow);}
+.topic-bar-item{background:var(--card);border-radius:10px;padding:10px 12px;margin-bottom:7px;box-shadow:var(--shadow);border:1px solid var(--border);}
+.tb-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;}
+.tb-name{font-weight:600;font-size:.78rem;}
+.tb-score{font-family:'Lora',serif;font-size:.88rem;}
+.tb-bar-track{height:7px;background:var(--border);border-radius:4px;overflow:hidden;}
+.tb-bar-fill{height:100%;border-radius:4px;transition:width 1s ease;}
+.tb-stats{display:flex;gap:8px;margin-top:5px;font-size:.66rem;color:var(--ink2);}
+.tb-stat{display:flex;align-items:center;gap:3px;}
+.tb-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+.sw-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px;}
+.sw-card{border-radius:10px;padding:11px;border:1px solid var(--border);}
+.sw-card.strong{background:var(--green-light);border-color:#b8dfc8;}
+.sw-card.weak{background:var(--red-light);border-color:#f0c0c0;}
+.sw-title{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;margin-bottom:9px;display:flex;align-items:center;gap:5px;}
+.sw-title.strong{color:var(--green);}
+.sw-title.weak{color:var(--red);}
+.sw-topic{font-size:.76rem;font-weight:600;color:var(--ink);margin-bottom:2px;}
+.sw-pct{font-size:.68rem;color:var(--ink2);}
+.suggest-box{background:var(--gold-light);border:1px solid #e8c878;border-radius:10px;padding:12px;margin-bottom:10px;}
+.suggest-h{font-weight:600;color:var(--gold);font-size:.84rem;margin-bottom:11px;}
+.suggest-item{display:flex;align-items:flex-start;gap:7px;padding:7px 0;border-bottom:1px solid rgba(184,131,42,.15);font-size:.76rem;}
+.suggest-item:last-child{border-bottom:none;padding-bottom:0;}
+.suggest-num{min-width:20px;height:20px;background:var(--gold);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;flex-shrink:0;margin-top:1px;}
+.suggest-txt{line-height:1.55;color:var(--ink);}
+.suggest-txt strong{color:var(--gold);}
+.result-actions{position:fixed;bottom:0;left:0;right:0;display:flex;gap:8px;padding:10px 14px 20px;background:rgba(244,241,236,.97);backdrop-filter:blur(8px);border-top:1px solid var(--border);z-index:50;}
+.btn-retry{flex:1;padding:11px 8px;background:linear-gradient(135deg,var(--accent),#254e8a);color:#fff;font-family:'DM Sans',sans-serif;font-size:.8rem;font-weight:700;border:none;border-radius:10px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;}
+.btn-new{flex:1;padding:11px 8px;background:transparent;color:var(--accent);font-family:'DM Sans',sans-serif;font-size:.8rem;font-weight:700;border:2px solid var(--accent);border-radius:10px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;}
+
+/* ══ LEADERBOARD ══ */
+.lb-wrap{max-width:600px;margin:0 auto;padding:20px 14px 160px;}
+.hof-season{background:#fff;border-bottom:1px solid rgba(0,0,0,.07);}
+.hof-season:last-child{border-bottom:none;}
+.hof-season-lbl{padding:10px 16px 6px;font-size:.68rem;font-weight:700;color:#b8832a;letter-spacing:.07em;text-transform:uppercase;border-bottom:1px solid rgba(0,0,0,.05);}
+.hof-row{display:flex;align-items:center;gap:10px;padding:10px 16px;border-bottom:1px solid rgba(0,0,0,.04);}
+.hof-row:last-child{border-bottom:none;}
+.hof-medal{font-size:1rem;width:22px;text-align:center;flex-shrink:0;}
+.hof-info{flex:1;display:flex;flex-direction:column;gap:1px;}
+.hof-name{font-size:.82rem;font-weight:600;color:#0d1f3c;}
+.hof-date{font-size:.58rem;color:#aaa;}
+.hof-right{display:flex;flex-direction:column;align-items:flex-end;gap:1px;}
+.hof-pct{font-size:.78rem;color:#b8832a;font-weight:700;}
+.hof-detail{font-size:.6rem;color:#aaa;}
+.hof-empty{padding:14px 16px;font-size:.72rem;color:#bbb;font-style:italic;text-align:center;}
+.lb-hdr{background:linear-gradient(135deg,#0a1628,#1a2f55);border-radius:16px;padding:22px 18px;margin-bottom:18px;color:#fff;text-align:center;}
+.lb-title{font-family:'Lora',serif;font-size:1.3rem;margin-bottom:4px;}
+.lb-date{font-size:.75rem;opacity:.55;margin-bottom:14px;}
+.lb-tabs{display:flex;gap:6px;justify-content:center;}
+.lb-tab{padding:7px 14px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);border-radius:20px;font-family:'DM Sans',sans-serif;font-size:.72rem;font-weight:500;color:rgba(255,255,255,.6);cursor:pointer;transition:all .15s;}
+.lb-tab.on{background:var(--gold);border-color:var(--gold);color:#fff;font-weight:600;}
+.lb-row{display:flex;align-items:center;gap:12px;background:var(--card);border-radius:12px;padding:14px 16px;margin-bottom:8px;box-shadow:var(--shadow);border:1px solid var(--border);}
+.lb-row.top1{border:2px solid #ffd700;background:linear-gradient(135deg,#fffbf0,#fff);}
+.lb-row.top2{border:2px solid #c0c0c0;}
+.lb-row.top3{border:2px solid #cd7f32;}
+.lb-rank{font-family:'Lora',serif;font-size:1.1rem;min-width:28px;text-align:center;}
+.lb-rank.r1{color:#ffd700;}
+.lb-rank.r2{color:#a0a0a0;}
+.lb-rank.r3{color:#cd7f32;}
+.lb-name{flex:1;font-weight:600;font-size:.9rem;}
+.lb-score{text-align:right;}
+.lb-pct{font-family:'Lora',serif;font-size:1.1rem;color:var(--accent);}
+.lb-time{font-size:.68rem;color:var(--ink3);}
+.lb-attempt{font-size:.58rem;color:var(--ink3);opacity:.5;margin-left:6px;}
+.lb-you{background:var(--accent);color:#fff;font-size:.58rem;font-weight:700;padding:2px 7px;border-radius:10px;margin-left:5px;}
+.lb-empty{text-align:center;padding:40px 20px;color:var(--ink3);font-size:.88rem;}
+.lb-loading{padding:10px 0;}
+
+/* ══ SUBMIT DIALOG ══ */
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:300;display:none;align-items:flex-end;justify-content:center;padding:0;}
+.overlay.open{display:flex;}
+.dialog{background:#fff;border-radius:20px 20px 0 0;padding:22px 18px 30px;width:100%;max-width:480px;box-shadow:0 -4px 30px rgba(0,0,0,.18);animation:slideUp .22s ease;}
+@keyframes slideUp{from{transform:translateY(60px);opacity:0;}to{transform:translateY(0);opacity:1;}}
+.dlg-icon{font-size:1.8rem;text-align:center;margin-bottom:5px;}
+.dialog h3{font-family:'Lora',serif;font-size:1rem;text-align:center;margin-bottom:5px;color:#0d1f3c;}
+.dlg-sub{font-size:.8rem;color:var(--ink2);text-align:center;line-height:1.55;margin-bottom:12px;}
+.dlg-unanswered{background:#fff8ee;border:1px solid #f0d080;border-radius:10px;padding:9px 12px;margin-bottom:14px;font-size:.76rem;color:#7a5500;line-height:1.7;display:none;}
+.dlg-unanswered strong{color:#b8832a;display:block;margin-bottom:3px;font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;}
+.dlg-btns{display:flex;gap:9px;}
+.dlg-btns button{flex:1;padding:12px;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:.86rem;font-weight:700;cursor:pointer;border:none;}
+.btn-dlg-cancel{background:#f0f0f0;color:var(--ink2);}
+.btn-dlg-confirm{background:linear-gradient(135deg,var(--gold),#c97d20);color:#fff;}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="hdr">
+  <div class="hdr-left">
+    <div class="am-logo"><span class="am-text">AM</span><span class="am-369">369</span></div>
+    <div><div class="hdr-title">JKPSC VAS — MCQ</div><div class="hdr-sub">AM Network · J&amp;K</div></div>
+  </div>
+  <div class="hdr-right">
+    <div class="hdr-pill">Veterinary</div>
+    <button class="hamburger" onclick="openDrawer()"><span></span><span></span><span></span></button>
+  </div>
+</div>
+
+<!-- DRAWER -->
+<div class="drawer-overlay" id="drawer-overlay" onclick="closeDrawer()"></div>
+<div class="drawer" id="drawer">
+  <div class="drawer-hdr">
+    <div class="drawer-logo-row">
+      <div class="drawer-am"><span>AM</span><span>369</span></div>
+      <div><div class="drawer-title">AM Network</div><div class="drawer-sub">JKPSC VAS · MCQ Practice</div></div>
+    </div>
+    <button class="drawer-close" onclick="closeDrawer()">✕</button>
+  </div>
+  <div class="drawer-body">
+    <div class="drawer-sec">
+      <div class="drawer-sec-lbl">Navigate</div>
+      <button class="dnav on" id="nav-practice" onclick="goTo('practice')"><span class="dnav-icon">📚</span>Practice Test</button>
+      <button class="dnav" id="nav-leaderboard" onclick="goTo('leaderboard')"><span class="dnav-icon">🏆</span>Leaderboard</button>
+    </div>
+    <div class="ddiv"></div>
+    <div class="drawer-sec">
+      <div class="drawer-sec-lbl">Daily Mock Test</div>
+      <div class="d-mock">
+        <div class="d-mock-top" id="d-mock-top">
+          <div class="d-mock-badge waiting"><span class="d-mock-dot"></span>Loading…</div>
+          <div class="d-mock-title">Daily <span>Mock Test</span></div>
+          <div class="d-mock-cd" id="d-mock-cd">--:--:--</div>
+        </div>
+        <div class="d-mock-sessions" id="d-mock-sessions"></div>
+        <button class="d-mock-btn" id="d-mock-btn" onclick="handleMockJoin();closeDrawer()" disabled>Loading…</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SETUP SCREEN -->
+<div id="screen-setup" class="screen active">
+  <div class="setup-wrap">
+    <div class="hero">
+      <div class="hero-badge">🏛️ JKPSC · Veterinary Assistant Surgeon</div>
+      <div class="hero-title">One Platform.<br><span>One Goal. Your Selection.</span></div>
+      <div class="hero-desc">
+        Master <b style="color:#e8b86a;font-weight:600;">10,000+ exam-focused MCQs</b> across every
+        JKPSC VAS subject — topic by topic, with instant explanations and a smart report card
+        that shows exactly where you need to push harder.<br><br>
+
+        <span style="color:#e8b86a;font-weight:600;">📚 Practice Session — Anytime</span><br>
+        <span style="color:rgba(255,255,255,.6);font-size:.8rem;">
+          25 fresh questions every time — drawn from a vast question bank ·
+          pick your subject · choose topics as you wish ·
+          timed test · instant explanations · detailed report card.
+        </span><br><br>
+
+        <span style="color:#e8b86a;font-weight:600;">⚡ 3 Live Mock Tests · Every Single Day</span><br>
+        <span style="color:rgba(255,255,255,.6);font-size:.8rem;">
+          50 questions · 12 minutes · all subjects · randomly picked fresh each session —
+          pure exam pressure, real competition, live leaderboard.
+        </span><br><br>
+
+        <span style="color:#e8b86a;font-weight:600;">👑 Hall of Fame</span><br>
+        <span style="color:rgba(255,255,255,.6);font-size:.8rem;">
+          The highest scorer of every 6-month season earns a permanent spot —
+          one name, one season, forever on the board.
+        </span><br><br>
+
+        <span style="color:rgba(255,255,255,.5);font-style:italic;font-size:.78rem;">
+          &ldquo;The exam rewards those who practise like it&rsquo;s already exam day.&rdquo;
+        </span>
+      </div>
+      <div class="feat-slider-wrap">
+        <div class="feat-slider" id="feat-slider">
+          <div class="feat-slide">
+            <span class="feat-slide-icon">📚</span>
+            <div class="feat-slide-title">Subject-wise MCQs</div>
+            <div class="feat-slide-desc">LPT, Medicine, Surgery, Pathology and more — organized by topic for focused practice</div>
+          </div>
+          <div class="feat-slide">
+            <span class="feat-slide-icon">📊</span>
+            <div class="feat-slide-title">Smart Report Card</div>
+            <div class="feat-slide-desc">Topic-wise score, accuracy, strengths and weak areas — identified instantly after every test</div>
+          </div>
+          <div class="feat-slide">
+            <span class="feat-slide-icon">🏆</span>
+            <div class="feat-slide-title">Daily Mock Test</div>
+            <div class="feat-slide-desc">3 live sessions daily at 7:00 AM · 1:30 PM · 10:00 PM — same questions for all with live leaderboard</div>
+          </div>
+          <div class="feat-slide">
+            <span class="feat-slide-icon">⏱</span>
+            <div class="feat-slide-title">Real Exam Pressure</div>
+            <div class="feat-slide-desc"><b style="color:#e8b86a;">Practice:</b> 25 fresh Qs from vast bank · pick subject &amp; topics &nbsp;|&nbsp; <b style="color:#e8b86a;">Mock:</b> 50 Qs · 12 min · all subjects</div>
+          </div>
+          <div class="feat-slide">
+            <span class="feat-slide-icon">💡</span>
+            <div class="feat-slide-title">Answer Explanations</div>
+            <div class="feat-slide-desc">Every question has a detailed explanation — learn the concept behind every right and wrong answer</div>
+          </div>
+          <div class="feat-slide">
+            <span class="feat-slide-icon">🆓</span>
+            <div class="feat-slide-title">Free — No Login</div>
+            <div class="feat-slide-desc">Completely free to use — no signup or login needed, open and start practising instantly</div>
+          </div>
+        </div>
+        <div class="feat-dots" id="feat-dots">
+          <span class="fdot on"></span>
+          <span class="fdot"></span>
+          <span class="fdot"></span>
+          <span class="fdot"></span>
+          <span class="fdot"></span>
+          <span class="fdot"></span>
+        </div>
+      </div>
+      <div class="hero-stats">
+        <div class="hstat"><span class="hstat-val">3</span><span class="hstat-lbl">Daily Mocks</span></div>
+        <div class="hstat"><span class="hstat-val">50</span><span class="hstat-lbl">Mock Qs</span></div>
+        <div class="hstat"><span class="hstat-val">25</span><span class="hstat-lbl">Practice Qs</span></div>
+        <div class="hstat"><span class="hstat-val">Free</span><span class="hstat-lbl">No Login</span></div>
+        <div class="hstat"><span class="hstat-val">Live</span><span class="hstat-lbl">Leaderboard</span></div>
+      </div>
+    </div>
+    <div class="setup-card">
+      <div class="setup-h">Configure Practice Session</div>
+      <div id="setup-loader" class="spin-wrap">
+  <div class="am-loader"><span></span><span></span><span></span></div>
+  <div class="am-dots"><div class="am-dot"></div><div class="am-dot"></div><div class="am-dot"></div><div class="am-dot"></div></div>
+  <div class="spin-txt" id="setup-loader-txt">Loading question bank…</div>
+</div>
+      <div id="setup-form" style="display:none">
+        <div id="err-box" class="err-box"></div>
+        <div class="form-grp">
+          <label class="form-lbl">Subject</label>
+          <select id="subject-sel"><option value="">— Select Subject —</option></select>
+        </div>
+        <div class="form-grp">
+          <label class="form-lbl">Topics <span style="font-weight:300;text-transform:none;letter-spacing:0;color:var(--ink3)">(tap to select)</span></label>
+          <div class="chip-area" id="chip-area"><span class="chip-hint">Select a subject first</span></div>
+        </div>
+        <div class="meta-row">
+          <div class="meta-pill"><div class="meta-val">25</div><div class="meta-lbl">Questions</div></div>
+          <div class="meta-pill"><div class="meta-val">12:30</div><div class="meta-lbl">Time Limit</div></div>
+          <div class="meta-pill"><div class="meta-val" id="avail-cnt">—</div><div class="meta-lbl">Available</div></div>
+        </div>
+        <button class="btn-main" id="btn-start" disabled>Begin Practice →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- QUIZ SCREEN -->
+<div id="screen-quiz" class="screen">
+  <div class="quiz-wrap">
+    <div class="timer-bar">
+      <div class="timer-num" id="timer-num">12:30</div>
+      <div class="prog-track"><div class="prog-fill" id="prog-fill" style="width:100%"></div></div>
+      <div id="q-ctr" class="q-ctr">Q 1 / 25</div>
+      <div id="mock-tag-el" class="mock-tag" style="display:none">MOCK</div>
+    </div>
+    <div class="nav-dots" id="nav-dots"></div>
+    <div class="q-card">
+      <div class="q-text" id="q-text">Loading…</div>
+      <div class="opts" id="opts"></div>
+    </div>
+    <div class="q-actions">
+      <button class="btn-skip" id="btn-skip">Skip →</button>
+      <button class="btn-nxt"  id="btn-nxt">Next →</button>
+      <button class="btn-sub"  id="btn-sub">⚡ Submit All</button>
+    </div>
+  </div>
+</div>
+
+<!-- RESULT SCREEN -->
+<div id="screen-result" class="screen">
+  <div class="result-wrap">
+    <div class="score-banner">
+      <div class="score-top">
+        <div class="score-pct" id="r-pct">—%</div>
+        <div><div class="score-frac" id="r-frac">—</div><div class="score-grade" id="r-grade">—</div></div>
+      </div>
+      <div class="score-pills">
+        <div class="sp"><span class="sp-val" id="sp-cor">—</span><span class="sp-lbl">Correct</span></div>
+        <div class="sp"><span class="sp-val" id="sp-wrng">—</span><span class="sp-lbl">Wrong</span></div>
+        <div class="sp"><span class="sp-val" id="sp-skip">—</span><span class="sp-lbl">Skipped</span></div>
+        <div class="sp"><span class="sp-val" id="sp-time">—</span><span class="sp-lbl">Time Left</span></div>
+      </div>
+    </div>
+    <div class="res-tabs">
+      <button class="res-tab on" id="tab-answers" onclick="switchTab('answers')"><span class="tab-icon">📋</span>View Answers</button>
+      <button class="res-tab" id="tab-report" onclick="switchTab('report')"><span class="tab-icon">📊</span>Report Card</button>
+      <button class="res-tab" id="tab-lb" onclick="switchTab('lb')" style="display:none"><span class="tab-icon">🏆</span>Leaderboard</button>
+    </div>
+    <div class="tab-panel on" id="panel-answers"><div id="answers-list"></div></div>
+    <div class="tab-panel" id="panel-report">
+      <div class="report-section"><div class="report-h">📈 Overall Performance</div>
+        <div class="overall-card">
+          <div class="donut-wrap"><svg width="72" height="72" viewBox="0 0 100 100"><circle class="donut-bg" cx="50" cy="50" r="40"/><circle class="donut-val" id="donut-circle" cx="50" cy="50" r="40" stroke="var(--accent)" stroke-dasharray="0 251.2"/></svg>
+            <div class="donut-center"><div class="donut-pct" id="donut-pct">0%</div><div class="donut-lbl">Score</div></div>
+          </div>
+          <div class="overall-stats" id="overall-stats"></div>
+        </div>
+      </div>
+      <div class="report-section"><div class="report-h">📚 Topic-wise Breakdown</div><div id="topic-bars"></div></div>
+      <div class="report-section"><div class="report-h">⚡ Strengths &amp; Weaknesses</div><div class="sw-grid" id="sw-grid"></div></div>
+      <div class="report-section"><div class="report-h">💡 Revision Suggestions</div><div class="suggest-box"><div class="suggest-h">📌 Focus areas:</div><div id="suggestions-list"></div></div></div>
+    </div>
+    <div class="tab-panel" id="panel-lb"><div id="result-lb-list"></div></div>
+    <div class="result-actions">
+      <button class="btn-retry" id="btn-retry">🔁 Reattempt</button>
+      <button class="btn-new"   id="btn-new">🏠 New Session</button>
+    </div>
+  </div>
+</div>
+
+<!-- LEADERBOARD SCREEN -->
+<div id="screen-leaderboard" class="screen">
+  <div class="lb-wrap">
+    <div class="lb-hdr">
+      <div class="lb-title">🏆 Daily Mock Leaderboard</div>
+      <div class="lb-date" id="lb-date-lbl">—</div>
+      <div class="lb-tabs">
+        <button class="lb-tab on" onclick="loadLbSession('Morning')"   id="lbt-Morning">☀️ 7:00 AM</button>
+        <button class="lb-tab"    onclick="loadLbSession('Afternoon')" id="lbt-Afternoon">🌤 1:30 PM</button>
+        <button class="lb-tab"    onclick="loadLbSession('Night')"     id="lbt-Night">🌙 10:00 PM</button>
+      </div>
+    </div>
+    <div id="lb-list">
+  <div class="lb-loading">
+    <div class="lb-skel"></div>
+    <div class="lb-skel" style="opacity:.75;"></div>
+    <div class="lb-skel" style="opacity:.5;"></div>
+  </div>
+</div>
+
+    <!-- Hall of Fame -->
+    <div id="hof-wrap" style="display:none;margin-top:28px;border-radius:16px;overflow:hidden;border:1px solid rgba(184,131,42,.3);">
+      <div style="background:linear-gradient(135deg,#0d1f3c,#1b3d6e);padding:14px 18px 10px;text-align:center;">
+        <div style="font-size:1rem;color:#e8b86a;font-weight:700;letter-spacing:.03em;">🏅 Hall of Fame</div>
+        <div style="font-size:.6rem;color:rgba(255,255,255,.35);margin-top:4px;letter-spacing:.05em;text-transform:uppercase;">Season Champions · Top 3 per season · Permanently listed</div>
+      </div>
+      <div id="hof-body"></div>
+    </div>
+  </div>
+</div>
+
+<!-- FIXED BOTTOM STRIP -->
+<div id="mock-strip"></div>
+
+<!-- LATE MODAL -->
+<div class="modal-ov" id="late-ov">
+  <div class="late-sheet">
+    <div class="late-head">
+      <div class="late-alarm">⏰</div>
+      <div><div class="late-warn">⚠️ You are joining late!</div><div class="late-htitle" id="late-htitle">Mock Test is Live</div></div>
+    </div>
+    <div class="late-body">
+      <div class="late-rem-box">
+        <div class="late-rem-num" id="late-rem-num">--:--</div>
+        <div><div class="late-rem-lbl">Time Remaining</div><div class="late-rem-sub" id="late-rem-sub">—</div></div>
+      </div>
+      <div class="late-text" id="late-text">—</div>
+      <button class="btn-join-late" id="btn-join-late">⚡ Join Now — I'll give my best!</button>
+      <button class="btn-skip-late" onclick="closeLate()">Skip this session</button>
+    </div>
+  </div>
+</div>
+
+<!-- NAME MODAL -->
+<div class="name-ov" id="name-ov">
+  <div class="name-sheet">
+    <div class="name-icon">✍️</div>
+    <div class="name-title">What's your name?</div>
+    <div class="name-sub">Your name will appear on today's leaderboard after the mock test.</div>
+    <input class="name-input" id="name-input" type="text" placeholder="Enter name (max 15 chars)" maxlength="15" autocomplete="off"/>
+    <div class="name-hint">Leave blank → you'll get a random name</div>
+    <button class="btn-name" onclick="confirmName()">Start Mock Test →</button>
+  </div>
+</div>
+
+<!-- SUBMIT DIALOG -->
+<div class="overlay" id="overlay">
+  <div class="dialog">
+    <div class="dlg-icon">📋</div>
+    <h3>Submit for Evaluation?</h3>
+    <div class="dlg-sub" id="dlg-msg">You are about to submit your test.</div>
+    <div class="dlg-unanswered" id="dlg-unanswered">
+      <strong>⚠️ Unanswered Questions</strong>
+      <span id="dlg-unlist"></span>
+    </div>
+    <div class="dlg-btns">
+      <button class="btn-dlg-cancel" onclick="closeDialog()">← Continue Test</button>
+      <button class="btn-dlg-confirm" onclick="confirmSubmit()">Proceed ✓</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════
+// CONFIG
+// ═══════════════════════════════════════════════
+const API      = "https://script.google.com/macros/s/AKfycbwH-JZPby4obzMAyswRXOuijd2NpFBJzafY07yS21YvoSLTvym55_lk027e-IhI9sldRA/exec";
+const TOTAL_QS = 25;
+const PRAC_T   = 750;  // 12:30
+const MOCK_T   = 720;  // 12:00
+
+// Sessions defined in IST (hh, mm)
+const SESSIONS = [
+  {label:"Morning",   h:7,  m:0,  icon:"☀️"},
+  {label:"Afternoon", h:13, m:30, icon:"🌤"},
+  {label:"Night",     h:22, m:0,  icon:"🌙"}
+];
+
+// ═══════════════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════════════
+let subjectMap={}, topicList=[], selectedSub="", selectedTops=[];
+let sessionQs=[], userAnswers=[], curQ=0;
+let timerSec=PRAC_T, timerInt=null, timeUsed=0;
+let isMock=false, mockKey="", mockName="";
+let retrySub="", retryTops=[];
+let lbDate="", lbSession="Morning";
+let stripInt=null, lateInt=null;
+let pendingMockKey=""; // key waiting for name modal
+
+// ═══════════════════════════════════════════════
+// MOCK TIME ENGINE — pure client-side IST
+// ═══════════════════════════════════════════════
+// ── IST Clock — uses WorldTimeAPI (CORS-safe, works from local file) ──
+// Fallback: device time adjusted to IST (+5:30)
+let _istBaseSec  = null;   // IST seconds at _syncMs
+let _syncMs      = 0;      // Date.now() when synced
+let _istDateStr  = "";
+
+async function syncISTFromServer() {
+  // Try WorldTimeAPI — works from any origin including content:// 
+  try {
+    const r = await fetch("https://worldtimeapi.org/api/timezone/Asia/Kolkata");
+    const d = await r.json();
+    // unixtime is UTC epoch seconds
+    const ist      = new Date(d.unixtime * 1000 + 19800000); // +5:30 = 19800s
+    _istBaseSec    = ist.getUTCHours()*3600 + ist.getUTCMinutes()*60 + ist.getUTCSeconds();
+    _syncMs        = Date.now();
+    _istDateStr    = d.datetime.substring(0,10); // "2026-03-12"
+    console.log("IST synced via WorldTimeAPI:", d.datetime);
+    return;
+  } catch(e) { /* fall through */ }
+  // Final fallback — device local time (works fine if device clock is correct)
+  _useDeviceTime();
+}
+
+function _useDeviceTime() {
+  // Use device local time directly — getHours() returns local time on all platforms
+  // If device clock is set to IST (India), this is correct
+  // No timezone math needed — avoid getTimezoneOffset() bugs in WebView
+  const now   = new Date();
+  _istBaseSec = now.getHours()*3600 + now.getMinutes()*60 + now.getSeconds();
+  _syncMs     = Date.now();
+  _istDateStr = now.getFullYear()+"-"+
+                String(now.getMonth()+1).padStart(2,"0")+"-"+
+                String(now.getDate()).padStart(2,"0");
+}
+
+function getISTSec() {
+  if (_istBaseSec === null) _useDeviceTime(); // safety
+  const elapsedSec = Math.floor((Date.now() - _syncMs) / 1000);
+  return (_istBaseSec + elapsedSec) % 86400;
+}
+
+function getISTDateStr() {
+  if (!_istDateStr) _useDeviceTime();
+  return _istDateStr;
+}
+function getMockState() {
+  const nowSec = getISTSec();
+  for (const s of SESSIONS) {
+    const start = s.h*3600 + s.m*60;
+    const end   = start + MOCK_T;
+    if (nowSec >= start && nowSec < end) {
+      return { status:"active", sess:s, remaining:end-nowSec, elapsed:nowSec-start, key:getISTDateStr()+"_"+s.label };
+    }
+  }
+  // Find next — always guaranteed because SESSIONS has 3 entries
+  let next = SESSIONS[0]; // default fallback
+  let minD = Infinity;
+  for (const s of SESSIONS) {
+    const start = s.h*3600 + s.m*60;
+    let d = start - nowSec;
+    if (d <= 0) d += 86400;
+    if (d < minD) { minD = d; next = {...s, secsUntil:d}; }
+  }
+  if (!next.secsUntil) next = {...SESSIONS[0], secsUntil: 86400}; // absolute safety
+  return { status:"waiting", next, key:null };
+}
+function fmtTime(sec) {
+  const h=Math.floor(sec/3600), m=Math.floor((sec%3600)/60), s=sec%60;
+  if (h>0) return `${String(h).padStart(2,"0")}:${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`;
+  return `${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`;
+}
+function sessTimeStr(s) { return `${String(s.h).padStart(2,"0")}:${String(s.m).padStart(2,"0")}`; }
+
+// ═══════════════════════════════════════════════
+// STRIP + DRAWER — rendered every second
+// ═══════════════════════════════════════════════
+function startMockUI() {
+  // Start rendering immediately with device time fallback
+  _useDeviceTime();
+  renderMockEverywhere();
+  setInterval(renderMockEverywhere, 1000);
+  // Try to sync with WorldTimeAPI in background; updates on success
+  syncISTFromServer();
+  // Re-sync every 15 minutes
+  setInterval(syncISTFromServer, 900000);
+}
+
+function renderMockEverywhere() {
+  const st = getMockState();
+  renderStrip(st);
+  renderDrawerMock(st);
+}
+
+function renderStrip(st) {
+  const el = document.getElementById("mock-strip");
+  if (!el) return;
+
+  if (st.status === "active") {
+    const m=Math.floor(st.remaining/60), s=st.remaining%60;
+    el.innerHTML = `
+      <div class="mstrip-live">
+        <div class="mstrip-live-row1">
+          <div class="mstrip-live-badge"><span class="mstrip-live-dot"></span>LIVE</div>
+          <div class="mstrip-live-title" style="flex:1;">⚡ ${st.sess.label} Mock — Live Now</div>
+          <div class="mstrip-live-timer">
+            <div class="mstrip-live-num">${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}</div>
+            <div class="mstrip-live-lbl">Remaining</div>
+          </div>
+        </div>
+        <div class="mstrip-live-row2">
+          <div class="mstrip-ticker-wrap" style="flex:1;overflow:hidden;padding:7px 12px;">
+            <div class="mstrip-ticker">
+              50 Questions &nbsp;·&nbsp; 12 Minutes &nbsp;·&nbsp; All Subjects &nbsp;·&nbsp; New Questions Every Session &nbsp;·&nbsp; Same Set For Everyone &nbsp;·&nbsp; Real Exam Pressure &nbsp;&nbsp;&nbsp;&nbsp;
+              50 Questions &nbsp;·&nbsp; 12 Minutes &nbsp;·&nbsp; All Subjects &nbsp;·&nbsp; New Questions Every Session &nbsp;·&nbsp; Same Set For Everyone &nbsp;·&nbsp; Real Exam Pressure &nbsp;&nbsp;&nbsp;&nbsp;
+            </div>
+          </div>
+          <button class="mstrip-live-btn" onclick="handleMockJoin()">🎯 Join Mock</button>
+        </div>
+      </div>`;
+  } else {
+    const ns   = st.next;
+    const h12  = ns.h > 12 ? ns.h-12 : (ns.h===0 ? 12 : ns.h);
+    const ampm = ns.h >= 12 ? "PM" : "AM";
+    const nxt  = `${h12}:${String(ns.m).padStart(2,"0")} ${ampm}`;
+    const _cH  = Math.floor(ns.secsUntil/3600);
+    const _cM  = Math.floor((ns.secsUntil%3600)/60);
+    const _cS  = ns.secsUntil%60;
+    const cd   = `${String(_cH).padStart(2,"0")}:${String(_cM).padStart(2,"0")}:${String(_cS).padStart(2,"0")}`;
+    el.innerHTML = `
+      <div class="mstrip-wait">
+        <div class="mstrip-practice-row">
+          <button class="mstrip-practice-btn" onclick="goToPractice()">
+            📚 &nbsp; Tap Here to Practice &nbsp;→
+          </button>
+        </div>
+        <div class="mstrip-row1">
+          <span class="mstrip-fire">⚡</span>
+          <span class="mstrip-next-txt">⚡ Next Mock — <b>${ns.icon} ${nxt} (${ns.label})</b></span>
+          <span class="mstrip-pills-row">${SESSIONS.map(s=>`<span class="mstrip-spill">${s.icon} ${sessTimeStr(s)}</span>`).join("")}</span>
+        </div>
+        <div class="mstrip-row2">
+          <div class="mstrip-tag2"><span class="mstrip-tag-dot"></span>STARTS AT</div>
+          <div class="mstrip-big-cd">${nxt} IST</div>
+          <span class="mstrip-desc2">${cd}</span>
+          <button class="mstrip-join" onclick="handleMockJoin()">🎯 Join Mock</button>
+        </div>
+      </div>`;
+  }
+}
+
+function goToPractice() {
+  goTo('practice');
+  setTimeout(() => {
+    const card = document.querySelector('.setup-card');
+    if (card) {
+      card.scrollIntoView({behavior:'smooth', block:'start'});
+      card.style.transition = 'box-shadow .4s';
+      card.style.boxShadow = '0 0 0 2px rgba(184,131,42,.7), 0 8px 32px rgba(0,0,0,.35)';
+      setTimeout(() => { card.style.boxShadow = ''; }, 1400);
+    }
+  }, 100);
+}
+
+function renderDrawerMock(st) {
+  const top   = document.getElementById("d-mock-top");
+  const sessl = document.getElementById("d-mock-sessions");
+  const btn   = document.getElementById("d-mock-btn");
+  if (!top||!sessl||!btn) return;
+
+  const sessRows = SESSIONS.map(s => {
+    const isLive    = st.status==="active" && st.sess.label===s.label;
+    const isNext    = st.status==="waiting" && st.next.label===s.label;
+    const cls       = isLive?"active-sess":isNext?"next":"";
+    const tag       = isLive?`<span class="d-sess-tag live-tag">● LIVE</span>`:isNext?`<span class="d-sess-tag next-tag">Next</span>`:"";
+    return `<div class="d-sess-row ${cls}"><span class="d-sess-dot"></span><span class="d-sess-time">${sessTimeStr(s)}</span><span class="d-sess-lbl">${s.icon} ${s.label}</span>${tag}</div>`;
+  }).join("");
+  sessl.innerHTML = sessRows;
+
+  if (st.status === "active") {
+    const m=Math.floor(st.remaining/60), s=st.remaining%60;
+    top.innerHTML = `
+      <div class="d-mock-badge live"><span class="d-mock-dot"></span>LIVE NOW</div>
+      <div class="d-mock-title">Mock Test <span>is Live!</span></div>
+      <div class="d-mock-cd live-cd">${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")} left</div>`;
+    btn.disabled   = false;
+    btn.textContent = "Join Mock Now →";
+  } else {
+    const ns = st.next;
+    const dcH = Math.floor(ns.secsUntil/3600);
+    const dcM = Math.floor((ns.secsUntil%3600)/60);
+    const dcS = ns.secsUntil%60;
+    const dcd = `${String(dcH).padStart(2,"0")}:${String(dcM).padStart(2,"0")}:${String(dcS).padStart(2,"0")}`;
+    const dh12  = ns.h > 12 ? ns.h-12 : (ns.h===0 ? 12 : ns.h);
+    const dampm = ns.h >= 12 ? "PM" : "AM";
+    const dnxt  = `${dh12}:${String(ns.m).padStart(2,"0")} ${dampm}`;
+    top.innerHTML = `
+      <div class="d-mock-badge waiting"><span class="d-mock-dot"></span>Next Session</div>
+      <div class="d-mock-title">Opens at <span>${ns.icon} ${dnxt} (${ns.label})</span></div>
+      <div class="d-mock-cd">${dcd}</div>`;
+    btn.disabled    = true;
+    btn.textContent = `Opens at ${sessTimeStr(ns)}`;
+  }
+}
+
+// ═══════════════════════════════════════════════
+// JOIN FLOW
+// ═══════════════════════════════════════════════
+function handleMockJoin() {
+  const st = getMockState();
+  if (st.status !== "active") {
+    const ns = st.next;
+    alert(`Mock test is not live right now.\n\nNext session: ${ns.icon} ${ns.label} at ${sessTimeStr(ns)} IST`);
+    return;
+  }
+  // Block reattempt on same device
+  if (localStorage.getItem("vasSubmitted_"+st.key)==="1") {
+    alert("You have already attempted this mock session.\n\nYour score is saved. Wait for the next session!");
+    return;
+  }
+  const GRACE = 60;
+  if (st.elapsed > GRACE) {
+    openLate(st);
+  } else {
+    pendingMockKey = st.key;
+    openName();
+  }
+}
+
+function openLate(st) {
+  const elMin = Math.floor(st.elapsed/60), elSec = st.elapsed%60;
+  const remMin = Math.floor(st.remaining/60), remSec = st.remaining%60;
+  document.getElementById("late-htitle").textContent = `${st.sess.icon} ${st.sess.label} Mock Test`;
+  document.getElementById("late-rem-num").textContent = `${String(remMin).padStart(2,"0")}:${String(remSec).padStart(2,"0")}`;
+  document.getElementById("late-rem-sub").textContent = `Started ${elMin>0?elMin+"m ":""}${elSec}s ago`;
+  document.getElementById("late-text").innerHTML =
+    `You are joining <strong>${elMin>0?elMin+"m "+elSec+"s":elSec+"s"} late.</strong> Others started on time. You only have <strong>${remMin}m ${remSec}s left</strong> — but you can still attempt and get on the leaderboard!`;
+  document.getElementById("btn-join-late").onclick = () => {
+    closeLate();
+    pendingMockKey = st.key;
+    openName();
+  };
+  document.getElementById("late-ov").classList.add("open");
+
+  // Keep countdown alive in late modal
+  clearInterval(lateInt);
+  lateInt = setInterval(() => {
+    const st2 = getMockState();
+    if (st2.status !== "active") { clearInterval(lateInt); closeLate(); return; }
+    const m=Math.floor(st2.remaining/60), s=st2.remaining%60;
+    const el2 = document.getElementById("late-rem-num");
+    if (el2) el2.textContent = `${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`;
+  }, 1000);
+}
+function closeLate() { clearInterval(lateInt); document.getElementById("late-ov").classList.remove("open"); }
+
+function openName() {
+  document.getElementById("name-input").value = localStorage.getItem("vasUserName") || "";
+  document.getElementById("name-ov").classList.add("open");
+  setTimeout(()=>document.getElementById("name-input").focus(), 300);
+}
+function confirmName() {
+  const val = document.getElementById("name-input").value.trim().substring(0,15);
+  mockName  = val || ("User"+Math.floor(Math.random()*9000+1000));
+  mockKey   = pendingMockKey;
+  document.getElementById("name-ov").classList.remove("open");
+  startMockSession();
+}
+document.addEventListener("keydown", e=>{
+  if (e.key==="Enter" && document.getElementById("name-ov").classList.contains("open")) confirmName();
+});
+
+// ═══════════════════════════════════════════════
+// DRAWER
+// ═══════════════════════════════════════════════
+function openDrawer()  { document.getElementById("drawer").classList.add("open"); document.getElementById("drawer-overlay").classList.add("open"); }
+function closeDrawer() { document.getElementById("drawer").classList.remove("open"); document.getElementById("drawer-overlay").classList.remove("open"); }
+function goTo(page) {
+  closeDrawer();
+  ["nav-practice","nav-leaderboard"].forEach(id=>document.getElementById(id).classList.remove("on"));
+  if (page==="practice")    { document.getElementById("nav-practice").classList.add("on");    showScreen("screen-setup"); }
+  if (page==="leaderboard") { document.getElementById("nav-leaderboard").classList.add("on"); showScreen("screen-leaderboard"); initLb(); }
+}
+
+// ═══════════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════════
+window.addEventListener("DOMContentLoaded", () => {
+  startMockUI();
+  loadSubjects();
+});
+
+async function loadSubjects() {
+  try {
+    const r = await fetch(API+"?action=getSubjects");
+    const d = await r.json();
+    // Re-render mock strip now that network is confirmed working
+    renderMockEverywhere();
+    subjectMap = d.subjectMap||{};
+    const sel = document.getElementById("subject-sel");
+    Object.keys(subjectMap).sort().forEach(sub=>{
+      const o=document.createElement("option"); o.value=sub; o.textContent=sub; sel.appendChild(o);
+    });
+    document.getElementById("setup-loader").style.display="none";
+    document.getElementById("setup-form").style.display="block";
+    sel.addEventListener("change",onSubjectChange);
+    document.getElementById("btn-start").addEventListener("click",()=>startSession(false));
+  } catch(e) {
+    document.getElementById("setup-loader").innerHTML=`<div style="color:var(--red);text-align:center;padding:20px"><b>Connection failed.</b><br><small>${e.message}</small></div>`;
+  }
+}
+
+// ═══════════════════════════════════════════════
+// MOCK SESSION
+// ═══════════════════════════════════════════════
+async function startMockSession() {
+  isMock = true;
+  document.getElementById("mock-tag-el").style.display="inline-block";
+  showScreen("screen-quiz");
+  document.getElementById("q-text").innerHTML='<div class="spin-wrap" style="padding:30px 0"><div class="am-loader"><span></span><span></span><span></span></div><div class="am-dots"><div class="am-dot"></div><div class="am-dot"></div><div class="am-dot"></div><div class="am-dot"></div></div><div class="spin-txt">Loading mock session…</div></div>';
+  document.getElementById("opts").innerHTML="";
+  document.getElementById("nav-dots").innerHTML="";
+  try {
+    // Verify session is still live before fetching
+    const statusR = await fetch(`${API}?action=getMockStatus`);
+    const statusD = await statusR.json();
+    if (statusD.status !== "active" || statusD.sessionKey !== mockKey) {
+      alert("This mock session has ended. Please wait for the next session.");
+      showScreen("screen-setup");
+      return;
+    }
+    const r = await fetch(`${API}?action=getMockQuestions&sessionKey=${encodeURIComponent(mockKey)}`);
+    const d = await r.json();
+    if (!d.questions?.length) { alert("Mock questions unavailable. Try again."); showScreen("screen-setup"); return; }
+    const st = getMockState();
+    sessionQs   = d.questions;
+    userAnswers = new Array(sessionQs.length).fill(null);
+    curQ      = 0;
+    timerSec  = st.status==="active" ? st.remaining : MOCK_T;
+    timeUsed  = 0;
+    buildDots(); renderQ(0); startTimer();
+  } catch(e) { alert("Failed: "+e.message); showScreen("screen-setup"); }
+}
+
+// ═══════════════════════════════════════════════
+// PRACTICE SESSION
+// ═══════════════════════════════════════════════
+async function startSession(isRetry) {
+  isMock = false;
+  document.getElementById("mock-tag-el").style.display="none";
+  const sub  = isRetry ? retrySub : selectedSub;
+  const tops = isRetry ? retryTops : (selectedTops.length===0 ? topicList : selectedTops);
+  showScreen("screen-quiz");
+  document.getElementById("q-text").innerHTML='<div class="spin-wrap" style="padding:20px 0"><div class="am-loader"><span></span><span></span><span></span></div><div class="am-dots"><div class="am-dot"></div><div class="am-dot"></div><div class="am-dot"></div><div class="am-dot"></div></div><div class="spin-txt">Fetching your questions…</div></div>';
+  document.getElementById("opts").innerHTML="";
+  document.getElementById("nav-dots").innerHTML="";
+  try {
+    const p = new URLSearchParams({action:"getQuestions",subject:sub,topics:tops.join("|"),count:TOTAL_QS});
+    const r = await fetch(API+"?"+p);
+    const d = await r.json();
+    if (!d.questions||d.questions.length<TOTAL_QS) { alert("Not enough questions. Try different topics."); showScreen("screen-setup"); return; }
+    retrySub=sub; retryTops=tops;
+    sessionQs=d.questions; userAnswers=new Array(TOTAL_QS).fill(null);
+    curQ=0; timerSec=PRAC_T; timeUsed=0;
+    buildDots(); renderQ(0); startTimer();
+  } catch(e) { alert("Failed: "+e.message); showScreen("screen-setup"); }
+}
+
+// ═══════════════════════════════════════════════
+// SUBJECT/TOPIC SELECTION
+// ═══════════════════════════════════════════════
+function onSubjectChange() {
+  selectedSub=document.getElementById("subject-sel").value; selectedTops=[];
+  document.getElementById("avail-cnt").textContent="—"; document.getElementById("btn-start").disabled=true;
+  const area=document.getElementById("chip-area"); area.innerHTML="";
+  if(!selectedSub){area.innerHTML='<span class="chip-hint">Select a subject first</span>';return;}
+  topicList=(subjectMap[selectedSub]||[]).sort();
+  const ac=document.createElement("span"); ac.className="chip all-on"; ac.textContent="All Topics"; ac.dataset.all="1";
+  ac.addEventListener("click",toggleAll); area.appendChild(ac);
+  topicList.forEach(t=>{const ch=document.createElement("span");ch.className="chip off";ch.textContent=t;ch.dataset.topic=t;ch.addEventListener("click",()=>toggleTopic(t,ch));area.appendChild(ch);});
+  updateAvail();
+}
+function toggleAll(){selectedTops=[];document.querySelectorAll(".chip[data-topic]").forEach(c=>c.className="chip off");document.querySelector(".chip[data-all]").className="chip all-on";updateAvail();}
+function toggleTopic(t,chip){const i=selectedTops.indexOf(t);if(i===-1){selectedTops.push(t);chip.className="chip on";}else{selectedTops.splice(i,1);chip.className="chip off";}document.querySelector(".chip[data-all]").className=selectedTops.length===0?"chip all-on":"chip all-off";updateAvail();}
+async function updateAvail(){
+  const tops=selectedTops.length===0?topicList:selectedTops;
+  if(!selectedSub||!tops.length)return;
+  document.getElementById("avail-cnt").textContent="…";
+  const btn=document.getElementById("btn-start");
+  btn.disabled=true;
+  btn.textContent="Collecting questions… please wait";
+  try{
+    const p=new URLSearchParams({action:"getCount",subject:selectedSub,topics:tops.join("|")});
+    const r=await fetch(API+"?"+p);const d=await r.json();const c=d.count||0;
+    document.getElementById("avail-cnt").textContent=c;
+    if(c<TOTAL_QS){btn.disabled=true;btn.textContent="Begin Practice →";showErr(`Only ${c} questions available. Need ${TOTAL_QS}.`);}
+    else{btn.disabled=false;btn.textContent="Begin Practice →";showErr("");}
+  }catch(e){document.getElementById("avail-cnt").textContent="?";btn.textContent="Begin Practice →";}
+}
+function showErr(msg){const el=document.getElementById("err-box");el.textContent=msg;el.style.display=msg?"block":"none";}
+
+// ═══════════════════════════════════════════════
+// QUIZ
+// ═══════════════════════════════════════════════
+function buildDots(){
+  const w=document.getElementById("nav-dots"); w.innerHTML="";
+  for(let i=0;i<sessionQs.length;i++){const d=document.createElement("div");d.className="dot"+(i===0?" cur":"");d.textContent=i+1;d.addEventListener("click",()=>renderQ(i));w.appendChild(d);}
+}
+function updateDots(){document.querySelectorAll(".dot").forEach((d,i)=>{d.className="dot";if(i===curQ)d.classList.add("cur");if(userAnswers[i]!==null)d.classList.add("ans");else if(i<curQ)d.classList.add("skip");});}
+function renderQ(idx){
+  curQ=idx; const q=sessionQs[idx];
+  document.getElementById("q-ctr").textContent=`Q ${idx+1} / ${sessionQs.length}`;
+  document.getElementById("q-text").textContent=q.question;
+  const grid=document.getElementById("opts"); grid.innerHTML="";
+  ["A","B","C","D"].forEach(l=>{
+    const btn=document.createElement("button");
+    btn.className="opt"+(userAnswers[idx]===l?" sel":"");
+    btn.innerHTML=`<span class="opt-lbl">${l}</span><span>${q["option"+l]}</span>`;
+    btn.addEventListener("click",()=>{userAnswers[idx]=l;renderQ(idx);});
+    grid.appendChild(btn);
+  });
+  const isLast=idx===sessionQs.length-1;
+  document.getElementById("btn-nxt").style.display=isLast?"none":"flex";
+  document.getElementById("btn-sub").style.display="flex";
+  document.getElementById("btn-nxt").onclick=()=>renderQ(idx+1);
+  document.getElementById("btn-skip").onclick=()=>{if(idx<sessionQs.length-1)renderQ(idx+1);};
+  updateDots();
+}
+function startTimer(){
+  clearInterval(timerInt);
+  timerInt=setInterval(()=>{timerSec--;timeUsed++;updateTimerUI();if(timerSec<=0){clearInterval(timerInt);confirmSubmit();}},1000);
+}
+function updateTimerUI(){
+  const m=Math.floor(timerSec/60),s=timerSec%60;
+  document.getElementById("timer-num").textContent=`${m}:${String(s).padStart(2,"0")}`;
+  const total=isMock?MOCK_T:PRAC_T;
+  document.getElementById("prog-fill").style.width=(timerSec/total*100)+"%";
+  const u=timerSec<=90;
+  document.getElementById("timer-num").classList.toggle("urgent",u);
+  document.getElementById("prog-fill").classList.toggle("urgent",u);
+}
+
+// ═══════════════════════════════════════════════
+// SUBMIT
+// ═══════════════════════════════════════════════
+document.getElementById("btn-sub").addEventListener("click",askSubmit);
+function askSubmit(){
+  const unIdx=userAnswers.map((a,i)=>a===null?i+1:null).filter(n=>n!==null);
+  const un=unIdx.length;
+  const msgEl=document.getElementById("dlg-msg");
+  const uBox=document.getElementById("dlg-unanswered");
+  const uList=document.getElementById("dlg-unlist");
+  if(un>0){
+    msgEl.textContent=`You have not marked ${un} question${un>1?"s":""}. Do you still wish to submit?`;
+    uBox.style.display="block";
+    uList.textContent="Q"+unIdx.join(", Q");
+  } else {
+    msgEl.textContent="All questions answered! Ready to submit your test?";
+    uBox.style.display="none";
+  }
+  document.getElementById("overlay").classList.add("open");
+}
+function closeDialog(){document.getElementById("overlay").classList.remove("open");}
+function confirmSubmit(){closeDialog();clearInterval(timerInt);showResults();}
+
+// ═══════════════════════════════════════════════
+// RESULTS
+// ═══════════════════════════════════════════════
+async function showResults(){
+  let correct=0,wrong=0,skipped=0;
+  sessionQs.forEach((q,i)=>{if(userAnswers[i]===null)skipped++;else if(userAnswers[i]===q.correct)correct++;else wrong++;});
+  const total=sessionQs.length, pct=Math.round(correct/total*100);
+  const tM=Math.floor(timerSec/60),tS=timerSec%60;
+  document.getElementById("r-pct").textContent=pct+"%";
+  document.getElementById("r-frac").textContent=`${correct} / ${total} correct`;
+  document.getElementById("r-grade").textContent=pct>=90?"🏆 Outstanding!":pct>=75?"🌟 Well prepared!":pct>=60?"👍 Needs revision":pct>=40?"📚 Below average":"⚠️ Urgent revision";
+  document.getElementById("sp-cor").textContent=correct;
+  document.getElementById("sp-wrng").textContent=wrong;
+  document.getElementById("sp-skip").textContent=skipped;
+  document.getElementById("sp-time").textContent=`${tM}:${String(tS).padStart(2,"0")}`;
+  document.getElementById("tab-lb").style.display=isMock?"flex":"none";
+  buildAnswersPanel(); buildReportCard(correct,wrong,skipped,pct);
+  if(isMock){
+    try{localStorage.setItem("vasUserName",mockName);localStorage.setItem("vasSubmitted_"+mockKey,"1");const p=new URLSearchParams({action:"submitMock",sessionKey:mockKey,userName:mockName,score:correct,total,timeTaken:timeUsed});const r=await fetch(API+"?"+p);const d=await r.json();if(d.leaderboard)buildResultLb(d.leaderboard,mockName);}catch(e){}
+    switchTab("lb");
+  }
+  document.getElementById("btn-retry").onclick=()=>isMock?(pendingMockKey=mockKey,openName()):startSession(true);
+  document.getElementById("btn-new").onclick=()=>showScreen("screen-setup");
+  showScreen("screen-result");
+}
+
+// ═══════════════════════════════════════════════
+// VIEW ANSWERS
+// ═══════════════════════════════════════════════
+function buildAnswersPanel(){
+  const list=document.getElementById("answers-list"); list.innerHTML="";
+  sessionQs.forEach((q,i)=>{
+    const ans=userAnswers[i],isCor=ans===q.correct,isSkip=ans===null;
+    const item=document.createElement("div"); item.className="rev-item "+(isSkip?"c-skip":isCor?"c-cor":"c-wrng");
+    const yourAns=isSkip?`<span class="ans-tag at-skip">Not answered</span>`:`<span class="ans-tag ${isCor?"at-yours-cor":"at-yours"}">Your: ${ans}) ${q["option"+ans]}</span>`;
+    const corrAns=!isCor?`<span class="ans-tag at-correct">✓ ${q.correct}) ${q["option"+q.correct]}</span>`:"";
+    const reason=q.reason?`<div class="reason-box"><span class="reason-lbl">Explanation</span>${q.reason}</div>`:"";
+    item.innerHTML=`<div class="rev-top"><span class="rev-badge ${isSkip?"b-skip":isCor?"b-cor":"b-wrng"}">${isSkip?"Skipped":isCor?"Correct":"Wrong"}</span><div class="rev-q"><b>Q${i+1}.</b> ${q.question}</div></div><div class="rev-ans-row">${yourAns}${corrAns}</div>${reason}`;
+    list.appendChild(item);
+  });
+}
+
+// ═══════════════════════════════════════════════
+// REPORT CARD
+// ═══════════════════════════════════════════════
+function buildReportCard(correct,wrong,skipped,pct){
+  const circ=251.2,filled=(pct/100)*circ;
+  setTimeout(()=>{document.getElementById("donut-circle").setAttribute("stroke-dasharray",`${filled} ${circ}`);document.getElementById("donut-pct").textContent=pct+"%";document.getElementById("donut-circle").setAttribute("stroke",pct>=75?"var(--green)":pct>=50?"var(--gold)":"var(--red)");},300);
+  const total=sessionQs.length,att=correct+wrong,acc=att>0?Math.round(correct/att*100):0;
+  document.getElementById("overall-stats").innerHTML=`<div class="stat-row"><span class="stat-lbl">Attempted</span><span class="stat-val">${att}/${total}</span></div><div class="stat-row"><span class="stat-lbl">Accuracy</span><span class="stat-val ${acc>=75?"green":acc>=50?"yellow":"red"}">${acc}%</span></div><div class="stat-row"><span class="stat-lbl">Correct</span><span class="stat-val green">${correct}</span></div><div class="stat-row"><span class="stat-lbl">Wrong</span><span class="stat-val red">${wrong}</span></div><div class="stat-row"><span class="stat-lbl">Skipped</span><span class="stat-val yellow">${skipped}</span></div>`;
+  const ts={};
+  sessionQs.forEach((q,i)=>{const t=q.topic;if(!ts[t])ts[t]={total:0,correct:0,wrong:0,skipped:0};ts[t].total++;const a=userAnswers[i];if(a===null)ts[t].skipped++;else if(a===q.correct)ts[t].correct++;else ts[t].wrong++;});
+  const te=Object.entries(ts).sort((a,b)=>(b[1].correct/b[1].total)-(a[1].correct/a[1].total));
+  const bw=document.getElementById("topic-bars"); bw.innerHTML="";
+  te.forEach(([t,s])=>{const p=Math.round(s.correct/s.total*100);const c=p>=75?"var(--green)":p>=50?"var(--gold)":"var(--red)";const d=document.createElement("div");d.className="topic-bar-item";d.innerHTML=`<div class="tb-top"><span class="tb-name">${t}</span><span class="tb-score" style="color:${c}">${p}%</span></div><div class="tb-bar-track"><div class="tb-bar-fill" style="width:0%;background:${c}" data-w="${p}"></div></div><div class="tb-stats"><span class="tb-stat"><span class="tb-dot" style="background:var(--green)"></span>${s.correct} correct</span><span class="tb-stat"><span class="tb-dot" style="background:var(--red)"></span>${s.wrong} wrong</span><span class="tb-stat"><span class="tb-dot" style="background:var(--yellow)"></span>${s.skipped} skipped</span></div>`;bw.appendChild(d);});
+  setTimeout(()=>document.querySelectorAll(".tb-bar-fill").forEach(el=>{el.style.width=el.dataset.w+"%";}),400);
+  const half=Math.ceil(te.length/2),sw=document.getElementById("sw-grid"); sw.innerHTML="";
+  const sc=document.createElement("div");sc.className="sw-card strong";sc.innerHTML=`<div class="sw-title strong">💪 Strong</div>`+te.slice(0,half).map(([t,s])=>{const p=Math.round(s.correct/s.total*100);return`<div class="sw-topic">${t}</div><div class="sw-pct">${p}% (${s.correct}/${s.total})</div>`;}).join("");sw.appendChild(sc);
+  const wc=document.createElement("div");wc.className="sw-card weak";wc.innerHTML=`<div class="sw-title weak">⚠️ Weak</div>`+te.slice(half).map(([t,s])=>{const p=Math.round(s.correct/s.total*100);return`<div class="sw-topic">${t}</div><div class="sw-pct">${p}% (${s.correct}/${s.total})</div>`;}).join("");sw.appendChild(wc);
+  const sl=document.getElementById("suggestions-list"); sl.innerHTML="";
+  te.slice(half).forEach(([t,s],i)=>{const p=Math.round(s.correct/s.total*100);const d=document.createElement("div");d.className="suggest-item";d.innerHTML=`<span class="suggest-num">${i+1}</span><span class="suggest-txt">${p<40?`<strong>${t}</strong>: Only ${p}% — urgent revision needed. Re-read full chapter.`:p<60?`<strong>${t}</strong>: ${p}% — borderline. Review wrong answers carefully.`:`<strong>${t}</strong>: ${p}% — slightly weak. Quick revision + 10 more questions.`}</span>`;sl.appendChild(d);});
+  if(!te.slice(half).length)sl.innerHTML=`<div class="suggest-item"><span class="suggest-num">✓</span><span class="suggest-txt">All topics performing well! Keep it up.</span></div>`;
+}
+
+// ═══════════════════════════════════════════════
+// RESULT LEADERBOARD
+// ═══════════════════════════════════════════════
+function buildResultLb(lb,myName){
+  const w=document.getElementById("result-lb-list"); w.innerHTML="";
+  if(!lb?.length){w.innerHTML='<div class="lb-empty">No entries yet for this session.</div>';return;}
+  lb.forEach(r=>{
+    const el=document.createElement("div");el.className=`lb-row${r.rank<=3?" top"+r.rank:""}`;
+    const m=Math.floor(r.timeTaken/60),s=r.timeTaken%60;
+    el.innerHTML=`<div class="lb-rank ${r.rank===1?"r1":r.rank===2?"r2":r.rank===3?"r3":""}">${r.rank===1?"🥇":r.rank===2?"🥈":r.rank===3?"🥉":"#"+r.rank}</div><div class="lb-name">${r.name}${r.name===myName?'<span class="lb-you">YOU</span>':''}</div><div class="lb-score"><div class="lb-pct">${r.pct}%</div><div class="lb-time">${r.score}/${r.total} · ${m}:${String(s).padStart(2,"0")}</div></div>`;
+    w.appendChild(el);
+  });
+}
+
+// ═══════════════════════════════════════════════
+// LEADERBOARD SCREEN
+// ═══════════════════════════════════════════════
+async function initLb(){
+  lbDate=getISTDateStr();
+  // Format date nicely: "12 March 2026"
+  const months=["January","February","March","April","May","June","July","August","September","October","November","December"];
+  const parts=lbDate.split("-");
+  const niceDate=`${parseInt(parts[2])} ${months[parseInt(parts[1])-1]} ${parts[0]}`;
+  document.getElementById("lb-date-lbl").textContent=`Today — ${niceDate}`;
+  // Auto-select current or next session
+  const st=getMockState();
+  let autoSess="Morning";
+  if(st.status==="active") autoSess=st.sess.label;
+  else {
+    // Pick the most recently passed session, or next upcoming
+    const nowSec=getISTSec();
+    // Find last session that has already passed today
+    let lastPassed=null;
+    for(const s of SESSIONS){
+      const start=s.h*3600+s.m*60;
+      if(nowSec>=start+MOCK_T) lastPassed=s; // fully passed
+    }
+    autoSess = lastPassed ? lastPassed.label : st.next.label;
+  }
+  loadLbSession(autoSess);
+}
+async function loadLbSession(session){
+  lbSession=session;
+  ["Morning","Afternoon","Night"].forEach(s=>document.getElementById("lbt-"+s).classList.toggle("on",s===session));
+  const list=document.getElementById("lb-list"); list.innerHTML=`<div class="lb-skel"></div><div class="lb-skel" style="opacity:.75;"></div><div class="lb-skel" style="opacity:.5;"></div>`;
+  try{
+    const r=await fetch(`${API}?action=getLeaderboard&sessionKey=${lbDate}_${session}`);
+    const d=await r.json(); const lb=d.leaderboard||[];
+    list.innerHTML="";
+    if(!lb.length){list.innerHTML='<div class="lb-empty">No entries for this session yet.<br><small>Be the first — attempt the mock test!</small></div>';return;}
+    lb.forEach(row=>{
+      const el=document.createElement("div");el.className=`lb-row${row.rank<=3?" top"+row.rank:""}`;
+      const m=Math.floor(row.timeTaken/60),s=row.timeTaken%60;
+      const dateDisp=row.attemptDate?`<span class="lb-attempt">${row.attemptDate}</span>`:"";
+      el.innerHTML=`<div class="lb-rank ${row.rank===1?"r1":row.rank===2?"r2":row.rank===3?"r3":""}">${row.rank===1?"🥇":row.rank===2?"🥈":row.rank===3?"🥉":"#"+row.rank}</div><div class="lb-name">${row.name}${dateDisp}</div><div class="lb-score"><div class="lb-pct">${row.pct}%</div><div class="lb-time">${row.score}/${row.total} · ${m}:${String(s).padStart(2,"0")}</div></div>`;
+      list.appendChild(el);
+    });
+    if(d.hallOfFame && d.hallOfFame.length) renderHOF(d.hallOfFame);
+  }catch(e){list.innerHTML='<div class="lb-empty">Could not load. Check connection.</div>';}
+}
+
+function renderHOF(hof){
+  const wrap=document.getElementById("hof-wrap");
+  const body=document.getElementById("hof-body");
+  if(!wrap||!body) return;
+  const medals=["🥇","🥈","🥉"];
+  let h="";
+  hof.forEach(s=>{
+    h+=`<div class="hof-season">
+      <div class="hof-season-lbl">🏆 ${s.season}</div>`;
+    if(!s.winners||!s.winners.length){
+      h+=`<div class="hof-empty">Season ongoing — no winner yet</div>`;
+    } else {
+      s.winners.forEach((w,i)=>{
+        const mn=Math.floor(w.time/60),sc=String(w.time%60).padStart(2,"0");
+        const dateDisp = w.attemptDate || "";
+        h+=`<div class="hof-row">
+          <span class="hof-medal">${medals[i]||"·"}</span>
+          <div class="hof-info">
+            <span class="hof-name">${w.name}</span>
+            ${dateDisp ? `<span class="hof-date">${dateDisp}</span>` : ""}
+          </div>
+          <div class="hof-right">
+            <span class="hof-pct">${w.pct}%</span>
+            <span class="hof-detail">${w.score}/${w.total} · ${String(mn).padStart(2,"0")}:${sc}</span>
+          </div>
+        </div>`;
+      });
+    }
+    h+=`</div>`;
+  });
+  body.innerHTML=h;
+  wrap.style.display="block";
+}
+
+
+// ── Feature Slider ──
+(function(){
+  const slider = document.getElementById("feat-slider");
+  const dots   = document.querySelectorAll(".fdot");
+  if(!slider) return;
+  const slides = slider.querySelectorAll(".feat-slide");
+  let cur = 0, tot = slides.length, autoTimer = null;
+
+  function goTo(n){
+    cur = (n + tot) % tot;
+    slider.style.transform = `translateX(-${cur * 100}%)`;
+    slider.style.transition = "transform .5s ease";
+    dots.forEach((d,i) => d.classList.toggle("on", i===cur));
+  }
+
+  function next(){ goTo(cur+1); }
+
+  function startAuto(){ autoTimer = setInterval(next, 3000); }
+  function stopAuto(){ clearInterval(autoTimer); }
+
+  // Touch swipe
+  let tx = 0;
+  slider.addEventListener("touchstart", e=>{ tx=e.touches[0].clientX; stopAuto(); }, {passive:true});
+  slider.addEventListener("touchend",   e=>{ const dx=e.changedTouches[0].clientX-tx; if(dx<-40)next(); else if(dx>40)goTo(cur-1); startAuto(); }, {passive:true});
+
+  // Dot click
+  dots.forEach((d,i) => d.addEventListener("click", ()=>{ stopAuto(); goTo(i); startAuto(); }));
+
+  goTo(0);
+  startAuto();
+})();
+// ═══════════════════════════════════════════════
+// UTILS
+// ═══════════════════════════════════════════════
+function switchTab(t){["answers","report","lb"].forEach(x=>{document.getElementById("tab-"+x)?.classList.toggle("on",x===t);document.getElementById("panel-"+x)?.classList.toggle("on",x===t);});}
+function showScreen(id){
+  document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+  window.scrollTo(0,0);
+  const hideStrip=["screen-quiz","screen-result"].includes(id);
+  const strip=document.getElementById("mock-strip");
+  if(strip) strip.style.display=hideStrip?"none":"block";
+}
+</script>
+</body>
+</html>
