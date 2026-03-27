@@ -1220,7 +1220,11 @@ function updateDots(){document.querySelectorAll(".dot").forEach((d,i)=>{d.classN
 function renderQ(idx){
   curQ=idx; const q=sessionQs[idx];
   document.getElementById("q-ctr").textContent=`Q ${idx+1} / ${sessionQs.length}`;
-  document.getElementById("q-text").textContent=q.question;
+  document.getElementById("q-text").innerHTML = q.question
+  .replace(/&/g,"&amp;")
+  .replace(/</g,"&lt;")
+  .replace(/>/g,"&gt;")
+  .replace(/\n/g,"<br>");
   const grid=document.getElementById("opts"); grid.innerHTML="";
   ["A","B","C","D"].forEach(l=>{
     const btn=document.createElement("button");
